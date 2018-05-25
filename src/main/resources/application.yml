@@ -1,0 +1,11 @@
+#server:
+#    port: 17252
+   
+spring:
+    data:
+        mongodb:
+            database: mydb
+#            host: 127.0.0.1
+            host: 172.17.117.175
+            port: 27017
+#            port: 27017
