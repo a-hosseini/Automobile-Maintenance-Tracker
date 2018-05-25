@@ -6,11 +6,13 @@
 package com.mycode.web;
 
 import com.mycode.domain.Car;
+import com.mycode.domain.CarEnum;
 import com.mycode.domain.DieselCar;
 import com.mycode.domain.ElectricCar;
 import com.mycode.domain.GasCar;
 import com.mycode.repository.CarRepository;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
@@ -39,35 +41,39 @@ public class CarController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Car>> aggregateAll(@RequestParam(required = false) String VIN) throws ParseException {
         if (VIN != null) {
-            Iterable<Car> carList = carRepository.findByVin(VIN);
-            return new ResponseEntity<>(carList, HttpStatus.OK);
+            Car car = carRepository.findByVin(VIN);
+            List<Car> list = new ArrayList<>();
+            list.add(car);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
         return new ResponseEntity<>(carRepository.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity<Iterable<Car>> delete(@RequestBody Car sentData) throws ParseException {
-        if (sentData != null) {
+        try {
             carRepository.delete(sentData);
             return new ResponseEntity<>(HttpStatus.GONE);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(carRepository.findAll(), HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Car> update(@RequestBody Car sentData) throws ParseException {
-        if (sentData != null) {
-            Car car;
-            if (sentData.getType().equalsIgnoreCase("gas")) {
-                car = carRepository.save(new GasCar(sentData));
-            } else if (sentData.getType().equalsIgnoreCase("electric")) {
-                car = carRepository.save(new ElectricCar(sentData));
-            } else {
-                car = carRepository.save(new DieselCar(sentData));
-            }
-            return new ResponseEntity<>(car, HttpStatus.ACCEPTED);
+        Car car;
+        if (sentData.getType() == null) {
+            return new ResponseEntity("Vehicle type has to be specified to be able to update it.", HttpStatus.BAD_REQUEST);
+        } else if (sentData.getType().equalsIgnoreCase(CarEnum.GAS.getName())) {
+            car = carRepository.save(new GasCar(sentData));
+        } else if (sentData.getType().equalsIgnoreCase(CarEnum.ELECTRIC.getName())) {
+            car = carRepository.save(new ElectricCar(sentData));
+        } else if (sentData.getType().equalsIgnoreCase(CarEnum.DIESEL.getName())) {
+            car = carRepository.save(new DieselCar(sentData));
+        } else {
+            return new ResponseEntity("The vehicle type is not chosen right!. \nPlease pick 'Gas','Diesel' or 'Electric'", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>(car, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -78,26 +84,28 @@ public class CarController {
             return new ResponseEntity<>(du, HttpStatus.CREATED);
         } catch (Exception e) {
             LOGGER.error("Failed to store records due to: ", e);
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Car sentData) {
         try {
             Car car;
-            if (sentData.getType().equalsIgnoreCase("gas")) {
+            if (sentData.getType().equalsIgnoreCase(CarEnum.GAS.getName())) {
                 car = carRepository.insert(new GasCar(sentData));
-            } else if (sentData.getType().equalsIgnoreCase("electric")) {
+            } else if (sentData.getType().equalsIgnoreCase(CarEnum.ELECTRIC.getName())) {
                 car = carRepository.insert(new ElectricCar(sentData));
-            } else {
+            } else if (sentData.getType().equalsIgnoreCase(CarEnum.DIESEL.getName())) {
                 car = carRepository.insert(new DieselCar(sentData));
+            } else {
+                return new ResponseEntity("The vehicle type is not chosen right!. \nPlease pick 'Gas','Diesel' or 'Electric'", HttpStatus.BAD_REQUEST);
             }
             LOGGER.debug("'1' record stored.");
             return new ResponseEntity<>(car, HttpStatus.CREATED);
         } catch (Exception e) {
             LOGGER.error("Failed to store records due to: ", e);
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

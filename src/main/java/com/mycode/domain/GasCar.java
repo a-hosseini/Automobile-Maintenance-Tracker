@@ -5,13 +5,10 @@
  */
 package com.mycode.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  *
  * @author ahossein
  */
-@Document(collection = "gas_car")
 public class GasCar extends Car {
 
     public GasCar() {
@@ -19,5 +16,10 @@ public class GasCar extends Car {
 
     public GasCar(Car sentData) {
         super(sentData);
+    }
+
+    @Override
+    public String getType() {
+        return CarEnum.GAS.getName();
     }
 }

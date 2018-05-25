@@ -5,13 +5,10 @@
  */
 package com.mycode.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  *
  * @author ahossein
  */
-@Document(collection = "electric_car")
 public class ElectricCar extends Car {
 
     public ElectricCar() {
@@ -24,6 +21,10 @@ public class ElectricCar extends Car {
     @Override
     public String[] getMaintenanceTasksList() {
         return new String[]{"Tire Rotation", "Batterÿ Charger Check"};
+    }
 
+    @Override
+    public String getType() {
+        return CarEnum.ELECTRIC.getName();
     }
 }

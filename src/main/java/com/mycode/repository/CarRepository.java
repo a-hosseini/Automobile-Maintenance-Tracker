@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CarRepository extends MongoRepository<Car, Integer> {
 
-    public Iterable<Car> findByVin(String VIN);
+//    public Iterable<Car> findByVin(String VIN);
+    public Car findByVin(String VIN);
 
 }

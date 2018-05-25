@@ -7,7 +7,6 @@ package com.mycode.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  *
@@ -22,22 +21,31 @@ public class Car {
     private short year;
     private int mileage;
     private String color;
-    private String trim; //Sedan, SUV or Truck
+    private String trim;
     @Transient
     private String type; //Diesel, Electric, Gas
 
-    public Car(){
-        
+    public Car() {
+
     }
+
+    public Car(String vin, String make, String model) {
+        this.vin = vin;
+        this.make = make;
+        this.model = model;
+    }
+
     public Car(Car sentData) {
         this.vin = sentData.vin;
         this.make = sentData.make;
+        this.model = sentData.model;
         this.year = sentData.year;
         this.mileage = sentData.mileage;
         this.color = sentData.color;
         this.trim = sentData.trim;
         this.type = sentData.type;
     }
+
     public String[] getMaintenanceTasksList() {
         return new String[]{"Oil Change", "Tire Rotation"};
     }
