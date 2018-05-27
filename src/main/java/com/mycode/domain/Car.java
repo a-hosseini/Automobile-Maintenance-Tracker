@@ -29,10 +29,15 @@ public class Car {
 
     }
 
-    public Car(String vin, String make, String model) {
+    public Car(String vin, String make, String model, short year, int mileage, String color, String trim) {
         this.vin = vin;
         this.make = make;
         this.model = model;
+        this.year = year;
+        this.mileage = mileage;
+        this.color = color;
+        this.trim = trim;
+//        this.type = sentData.type;
     }
 
     public Car(Car sentData) {
@@ -112,6 +117,19 @@ public class Car {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean equalsAnyAttributes(Car car) {
+        if (this.vin.equalsIgnoreCase(car.getVin())
+                || this.make.equalsIgnoreCase(car.getMake())
+                || this.model.equalsIgnoreCase(car.getModel())
+                || this.year == car.getYear()
+                || this.mileage == car.getMileage()
+                || this.trim.equalsIgnoreCase(car.getTrim())
+                || this.color.equalsIgnoreCase(car.getColor())) {
+            return true;
+        }
+        return false;
     }
 
 }

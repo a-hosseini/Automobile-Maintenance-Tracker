@@ -39,7 +39,7 @@ public class CarController {
     private CarRepository carRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Car>> aggregateAll(@RequestParam(required = false) String VIN) throws ParseException {
+    public ResponseEntity<Iterable<Car>> find(@RequestParam(required = false) String VIN) throws ParseException {
         if (VIN != null) {
             Car car = carRepository.findByVin(VIN);
             List<Car> list = new ArrayList<>();
