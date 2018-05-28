@@ -53,7 +53,10 @@
                             <mainClass>com.mycode.Application</mainClass>
                         </manifest>
                     </archive>
+                    <executable>true</executable>
                 </configuration>
+                
             </plugin>
         </plugins>
-</build></project>
+    </build>
+</project>
