@@ -1,0 +1,11 @@
+{
+    "vin": "ABC",
+    "make": "Honda",
+    "model": "Accord",
+    "year": 2010,
+    "mileage": 100000,
+    "color": "Red",
+    "trim": "Ex-V6",
+    "type": null,
+    "maintenanceTasksList": ["Oil Change", "Tire Rotation"]
+}

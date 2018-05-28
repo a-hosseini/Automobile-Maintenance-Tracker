@@ -5,17 +5,21 @@
  */
 package com.mycode.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.lang.NonNull;
 
 /**
  *
  * @author ahossein
  */
-public class Car {
+public class Car implements Serializable{
 
     @Id
     private String vin;
+    @NonNull
     private String make;
     private String model;
     private short year;
@@ -120,6 +124,8 @@ public class Car {
     }
 
     public boolean equalsAnyAttributes(Car car) {
+        if(car == null)
+            return false;
         if (this.vin.equalsIgnoreCase(car.getVin())
                 || this.make.equalsIgnoreCase(car.getMake())
                 || this.model.equalsIgnoreCase(car.getModel())
@@ -130,6 +136,59 @@ public class Car {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.vin);
+        hash = 23 * hash + Objects.hashCode(this.make);
+        hash = 23 * hash + Objects.hashCode(this.model);
+        hash = 23 * hash + this.year;
+        hash = 23 * hash + this.mileage;
+        hash = 23 * hash + Objects.hashCode(this.color);
+        hash = 23 * hash + Objects.hashCode(this.trim);
+        hash = 23 * hash + Objects.hashCode(this.type);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Car other = (Car) obj;
+        if (this.year != other.year) {
+            return false;
+        }
+        if (this.mileage != other.mileage) {
+            return false;
+        }
+        if (!Objects.equals(this.vin, other.vin)) {
+            return false;
+        }
+        if (!Objects.equals(this.make, other.make)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
+            return false;
+        }
+        if (!Objects.equals(this.color, other.color)) {
+            return false;
+        }
+        if (!Objects.equals(this.trim, other.trim)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        return true;
     }
 
 }
