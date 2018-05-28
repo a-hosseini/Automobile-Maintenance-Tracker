@@ -50,7 +50,7 @@ public class CarController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Iterable<Car>> delete(@RequestBody Car sentData) throws ParseException {
+    public ResponseEntity<String> delete(@RequestBody Car sentData) throws ParseException {
         try {
             carRepository.delete(sentData);
             return new ResponseEntity<>(HttpStatus.GONE);
@@ -91,6 +91,9 @@ public class CarController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Car sentData) {
         try {
+            if (sentData.getType() == null) {
+                return new ResponseEntity("The vehicle type is not chosen!. \nPlease pick 'Gas','Diesel' or 'Electric'", HttpStatus.BAD_REQUEST);
+            }
             Car car;
             if (sentData.getType().equalsIgnoreCase(CarEnum.GAS.getName())) {
                 car = carRepository.insert(new GasCar(sentData));

@@ -15,7 +15,7 @@ import org.springframework.lang.NonNull;
  *
  * @author ahossein
  */
-public class Car implements Serializable{
+public class Car implements Serializable {
 
     @Id
     private String vin;
@@ -124,8 +124,9 @@ public class Car implements Serializable{
     }
 
     public boolean equalsAnyAttributes(Car car) {
-        if(car == null)
+        if (car == null) {
             return false;
+        }
         if (this.vin.equalsIgnoreCase(car.getVin())
                 || this.make.equalsIgnoreCase(car.getMake())
                 || this.model.equalsIgnoreCase(car.getModel())
@@ -160,9 +161,9 @@ public class Car implements Serializable{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+//        if (getClass() != obj.getClass()) { // commented because we want to have polymorphism.
+//            return false;
+//        }
         final Car other = (Car) obj;
         if (this.year != other.year) {
             return false;
@@ -183,9 +184,6 @@ public class Car implements Serializable{
             return false;
         }
         if (!Objects.equals(this.trim, other.trim)) {
-            return false;
-        }
-        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         return true;
