@@ -30,7 +30,7 @@
 
 
 ### Insert: How to Post a new entity into the ReST endpoint:
-  -	[localhost](http://localhost:8080/car)
+  -	http://localhost:8080/car
 ```json
 
 {
@@ -47,11 +47,11 @@
 ```
 
 ### Find: How to Get an entity from the ReST endpoint:
-	- [localhost](http://localhost:8080/car?VIN={ABC})
+	- http://localhost:8080/car?VIN={ABC}
 
 
 ### Update: How to Put a new entity into the ReST endpoint:
-	- [localhost](http://localhost:8080/car)
+	- http://localhost:8080/car
 ```json
 
 {
@@ -68,7 +68,7 @@
 ```
 
 ### Delete: How to Delete a new entity into the ReST endpoint:
-	- [localhost](http://localhost:8080/car)
+	- http://localhost:8080/car
 ```json
 
 {
