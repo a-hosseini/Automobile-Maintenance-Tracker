@@ -29,8 +29,8 @@
 1. This is a full stack application and the software works end to end. The only remaining item is a pretty AngularJS UI that will be finished soon.
 
 
-### How to Post a new entity into the ReST endpoint:
-	**[localhost] (http://localhost:8080/car)
+### Insert: How to Post a new entity into the ReST endpoint:
+	[localhost] (http://localhost:8080/car)
 ```json
 
 {
@@ -44,7 +44,42 @@
 	type: "Electric"
 }
 
-````
+```
 
-### How to Get an entity from the ReST endpoint:
-	** [localhost] (http://localhost:8080/car?VIN{"ABC"})
+### Find: How to Get an entity from the ReST endpoint:
+	 [localhost] (http://localhost:8080/car?VIN={ABC})
+
+
+### Update: How to Put a new entity into the ReST endpoint:
+	[localhost] (http://localhost:8080/car)
+```json
+
+{
+    "vin": "ABC",
+    "make": "Honda",
+    "model": "Accord",
+    "year": 2010,
+    "mileage": 100000,
+    "color": "Blue",
+    "trim": "Ex-V4",
+	type: "Diesel"
+}
+
+```
+
+### Delete: How to Delete a new entity into the ReST endpoint:
+	[localhost] (http://localhost:8080/car)
+```json
+
+{
+    "vin": "ABC",
+    "make": "Honda",
+    "model": "Accord",
+    "year": 2010,
+    "mileage": 100000,
+    "color": "Blue",
+    "trim": "Ex-V4",
+	type: "Diesel"
+}
+
+```
