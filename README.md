@@ -30,7 +30,7 @@
 
 
 ### How to Post a new entity into the ReST endpoint:
-	-[localhost] {http://localhost:8080/car}
+	**[localhost] (http://localhost:8080/car)
 ```json
 
 {
@@ -47,4 +47,4 @@
 ````
 
 ### How to Get an entity from the ReST endpoint:
-	-[localhost] {http://localhost:8080/car?VIN\{"ABC"\}}
+	** [localhost] (http://localhost:8080/car?VIN{"ABC"})
