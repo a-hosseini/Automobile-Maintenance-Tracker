@@ -51,8 +51,9 @@
 
 
 ### Find: How to Get an entity from the ReST endpoint:
-	- http://localhost:8080/car?VIN={ABC}
+  - http://localhost:8080/car?VIN={ABC}
 
+![Get](get.png)
 
 ### Update: How to Put a new entity into the ReST endpoint:
 	- http://localhost:8080/car
@@ -71,6 +72,9 @@
 
 ```
 
+![Put](put.png)
+
+
 ### Delete: How to Delete a new entity into the ReST endpoint:
 	- http://localhost:8080/car
 ```json
@@ -87,3 +91,4 @@
 }
 
 ```
+![Delete](delete.png)
