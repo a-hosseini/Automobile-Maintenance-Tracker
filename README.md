@@ -24,15 +24,16 @@
 1. Tomcat is the embedded web server in this application.
 1. Open the project in an IDE like NetBeans. 
 1. Update src/main/resources/application.yml to connect to your MongoDB
-	- ```yaml
-spring:
-    data:
-        mongodb:
-            database: mydb
-            host: 172.17.117.175
-            port: 27017	
+	 
+```yaml
+	spring:
+		data:
+			mongodb:
+				database: mydb
+				host: 172.17.117.175
+				port: 27017	
 	
-	```
+```
 1. Build and run the project from the IDE.
 1. Use Postman to Get, Post, Put and Delete entities.
 1. This is a full stack application and the software works end to end. The only remaining item is a pretty AngularJS UI that will be finished soon.
