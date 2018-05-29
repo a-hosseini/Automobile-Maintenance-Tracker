@@ -46,6 +46,10 @@
 
 ```
 
+![Post](post.png)
+
+
+
 ### Find: How to Get an entity from the ReST endpoint:
 	- http://localhost:8080/car?VIN={ABC}
 
