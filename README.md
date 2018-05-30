@@ -45,7 +45,7 @@
 	\> cd \<PROJECT_ROOT_FOLDER>\client 
 	\> ng serve
 ```
-1. Now, the UI application is as http://localhost:4200 and the server side is http://localhost:8080
+### Now, UI application is http://localhost:4200 and the server is http://localhost:8080.
 
 ### Insert: How to Post a new entity into the ReST endpoint:
   -	http://localhost:8080/car
