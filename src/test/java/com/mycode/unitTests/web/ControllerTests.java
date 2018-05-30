@@ -46,7 +46,7 @@ public class ControllerTests {
         given(this.carRepository.findByVin("ABC"))
                 .willReturn(new Car("ABC", "Honda", "Accord", year, 100000, "Red", "Ex-V6"));
         this.mvc.perform(get("/car").param("VIN", "ABC").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().string("[{\"vin\":\"ABC\",\"make\":\"Honda\",\"model\":\"Accord\",\"year\":2010,\"mileage\":100000,\"color\":\"Red\",\"trim\":\"Ex-V6\",\"type\":null,\"maintenanceTasksList\":[\"Oil Change\",\"Tire Rotation\"]}]"));
+                .andExpect(status().isOk()).andExpect(content().string("[{\"vin\":\"ABC\",\"make\":\"Honda\",\"model\":\"Accord\",\"year\":2010,\"mileage\":100000,\"color\":\"Red\",\"trim\":\"Ex-V6\",\"type\":null,\"maintenanceTasksList\":[\"Oil Change\",\"Tire Rotation\"],\"_links\":{\"self\":{\"href\":\"http://localhost/car?VIN=ABC\"}}}]"));
     }
 
     @Test
@@ -55,6 +55,6 @@ public class ControllerTests {
         given(this.carRepository.findByVin("ABC"))
                 .willReturn(new Car("ABC", "Honda", "Accord", year, 100000, "Red", "Ex-V6"));
         this.mvc.perform(get("/car").param("VIN", "ABC").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().string("[{\"vin\":\"ABC\",\"make\":\"Honda\",\"model\":\"Accord\",\"year\":2010,\"mileage\":100000,\"color\":\"Red\",\"trim\":\"Ex-V6\",\"type\":null,\"maintenanceTasksList\":[\"Oil Change\",\"Tire Rotation\"]}]"));
+                .andExpect(status().isOk()).andExpect(content().string("[{\"vin\":\"ABC\",\"make\":\"Honda\",\"model\":\"Accord\",\"year\":2010,\"mileage\":100000,\"color\":\"Red\",\"trim\":\"Ex-V6\",\"type\":null,\"maintenanceTasksList\":[\"Oil Change\",\"Tire Rotation\"],\"_links\":{\"self\":{\"href\":\"http://localhost/car?VIN=ABC\"}}}]"));
     }
 }

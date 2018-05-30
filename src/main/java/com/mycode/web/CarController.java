@@ -15,11 +15,15 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/car")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CarController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CarController.class);
@@ -40,13 +45,22 @@ public class CarController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Car>> find(@RequestParam(required = false) String VIN) throws ParseException {
+        List<Car> list = new ArrayList<>();
         if (VIN != null) {
             Car car = carRepository.findByVin(VIN);
-            List<Car> list = new ArrayList<>();
+            car.add(linkTo(methodOn(CarController.class).find(VIN)).withSelfRel());
             list.add(car);
             return new ResponseEntity<>(list, HttpStatus.OK);
         }
-        return new ResponseEntity<>(carRepository.findAll(), HttpStatus.OK);
+        list = carRepository.findAll();
+        list.forEach(item -> { // This can also be done with ResourceAssemblers. 
+            try {
+                item.add(linkTo(methodOn(CarController.class).find(item.getVin())).withSelfRel());
+            } catch (ParseException ex) {
+                LOGGER.error(null, ex);
+            }
+        });
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)

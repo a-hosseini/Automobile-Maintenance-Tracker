@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 
 /**
  *
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
  */
 @SpringBootApplication
 @ComponentScan
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class Application {
 
     @Autowired

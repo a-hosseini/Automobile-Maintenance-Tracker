@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.lang.NonNull;
 
 /**
  *
  * @author ahossein
  */
-public class Car implements Serializable {
+public class Car extends ResourceSupport implements Serializable {
 
     @Id
     private String vin;
