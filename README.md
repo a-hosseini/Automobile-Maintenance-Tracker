@@ -39,8 +39,13 @@
 	```
 1. Build and run the project from the IDE.
 1. Use Postman to Get, Post, Put and Delete entities.
-1. This is a full stack application and the software works end to end. The only remaining item is a pretty AngularJS UI that will be finished soon.
-
+1. This is a full stack application and the software works end to end.
+1. The UI is build using Angular 5. 
+```
+	\> cd \<PROJECT_ROOT_FOLDER>\client 
+	\> ng serve
+```
+1. Now, the UI application is as http://localhost:4200 and the server side is http://localhost:8080
 
 ### Insert: How to Post a new entity into the ReST endpoint:
   -	http://localhost:8080/car
